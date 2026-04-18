@@ -19,11 +19,11 @@ SIMD_FLAGS := -O2
 else ifeq ($(UNAME_M), x86_64)
 CXX = g++ 
 CC = gcc
-CXXFLAGS = -Wall -O2
+CXXFLAGS = -Wall -O3
 LDFLAGS = -shared
 LIBS = -lbe -ltracker
 ARCH = x86_64
-SIMD_FLAGS := -O3
+LD_OPTIMIZE = -Wl,--gc-sections
 endif
 
 
@@ -32,7 +32,7 @@ all: build
 build: 
 	@echo "--------- Building $(NAME) $(ARCH) ---------"
 
-	$(CXX) $(CXXFLAGS) $(LDFLAGS) $(NAME).cpp -o $(NAME) $(LIBS)
+	$(CXX) -o $(NAME) $(CXXFLAGS) $(LDFLAGS) $(LIBS) $(LD_OPTIMIZE) $(NAME).cpp
 	xres -o $(NAME) icon.rsrc  
 	mimeset -f $(NAME)
 
