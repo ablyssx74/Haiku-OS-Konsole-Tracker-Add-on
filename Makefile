@@ -8,22 +8,22 @@ PACKAGE_DIR := build/package
 
 UNAME_M := $(shell uname -p)
 ifeq ($(UNAME_M), x86)
-	TYPE = SHARED
-	SRCS = OpenKonsole.cpp
-	LIBS = be tracker
-	OPTIMIZE = FULL
-	COMPILER_FLAGS = -Wall -fPIC
-	include /boot/system/develop/etc/makefile-engine
-    ARCH = x86_gcc2
-    SIMD_FLAGS := -O2
+TYPE = SHARED
+SRCS = OpenKonsole.cpp
+LIBS = be tracker
+OPTIMIZE = FULL
+COMPILER_FLAGS = -Wall -fPIC
+include /boot/system/develop/etc/makefile-engine
+ARCH = x86_gcc2
+SIMD_FLAGS := -O2
 else ifeq ($(UNAME_M), x86_64)
-	CXX = g++ 
-	CC = gcc
-	CXXFLAGS = -Wall -O2
-	LDFLAGS = -shared
-	LIBS = -lbe -ltracker
-    ARCH = x86_64
-    SIMD_FLAGS := -O3
+CXX = g++ 
+CC = gcc
+CXXFLAGS = -Wall -O2
+LDFLAGS = -shared
+LIBS = -lbe -ltracker
+ARCH = x86_64
+SIMD_FLAGS := -O3
 endif
 
 
