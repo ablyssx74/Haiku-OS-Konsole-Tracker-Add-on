@@ -3,4 +3,4 @@
 
 #### Tested on x86_64 and x86_gcc2
 
-#### Build hpkg: ```makee && make package```
+#### Build hpkg: ```make && make package```
