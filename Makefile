@@ -64,7 +64,6 @@ else ifeq ($(UNAME_M), x86)
 endif
 	
 clean:
-	rm -f $(NAME)
-	rm -f *.hpkg
+	rm -f $(NAME) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 	rm -fr objects*
 	rm -fr build
