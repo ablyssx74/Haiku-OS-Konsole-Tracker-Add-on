@@ -16,6 +16,7 @@ provides {
 }
 requires {
 	haiku
+	konsole_kf6
 }	
 urls {
 	"https://github.com/ablyssx74/Haiku-OS-Konsole-Tracker-Add-on"

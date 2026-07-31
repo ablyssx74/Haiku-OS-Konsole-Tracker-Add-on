@@ -38,7 +38,7 @@ build:
 
 
 
-package:
+package: all
 ifeq ($(UNAME_M), x86_64)
 	@[ -n "$(PACKAGE_DIR)" ] || { echo "PACKAGE_DIR is undefined"; exit 1; }
 	rm -rf "./$(PACKAGE_DIR)"
@@ -57,8 +57,8 @@ else ifeq ($(UNAME_M), x86)
 	sed -e 's/$$(NAME)/$(NAME)/g' -e 's/$$(VERSION)/$(VERSION)/g' -e 's/$$(ARCH)/$(ARCH)/' -e 's/$$(YEAR)/$(shell date +%Y)/' PackageInfo.tpl > $(PACKAGE_DIR)/.PackageInfo
 	mkdir -p $(PACKAGE_DIR)/add-ons/Tracker
 	rc -o icon.rsrc icon.rdef 
-	xres -o $(OBJ_DIR)/$(NAME) icon.rsrc  
-	mimeset -f $(OBJ_DIR)/$(NAME)	
+	xres -o $(NAME) icon.rsrc  
+	mimeset -f $(NAME)	
 	cp $(OBJ_DIR)/$(NAME) $(PACKAGE_DIR)/add-ons/Tracker/Open\ konsole
 	package create -C $(PACKAGE_DIR) $(NAME)-$(VERSION)-1-$(ARCH).hpkg
 endif
