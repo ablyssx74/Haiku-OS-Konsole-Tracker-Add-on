@@ -1,7 +1,7 @@
 # Makefile for Haiku Tracker Add-on
 
 NAME = OpenKonsole
-VERSION = 1.0.0
+VERSION = 1.0.1
 PACKAGE_DIR := build/package
 
 
@@ -16,7 +16,7 @@ ifeq ($(UNAME_M), x86)
 	ARCH = x86_gcc2
 	LD_OPTIMIZE = -Wl,--gc-sections
 	is32bit = _x86
-	CNAME = OpenKonsole_32bit
+	DEFINES += -DIS_HAIKU_32BIT
 else ifeq ($(UNAME_M), x86_64)
 	CXX = g++ 
 	CC = gcc
@@ -25,15 +25,15 @@ else ifeq ($(UNAME_M), x86_64)
 	LIBS = -lbe -ltracker
 	ARCH = x86_64
 	LD_OPTIMIZE = -Wl,--gc-sections
-	CNAME = OpenKonsole
 endif
 
+DEFINES := $(DEFINES)
 
 all: build package
 
 build: 
 	@echo "--------- Building $(NAME) $(ARCH) ---------"
-	$(CXX) -o $(NAME) $(CXXFLAGS) $(LDFLAGS) $(LIBS) $(LD_OPTIMIZE) $(CNAME).cpp
+	$(CXX) -o $(NAME) $(CXXFLAGS) $(DEFINES) $(LDFLAGS) $(LIBS) $(LD_OPTIMIZE) $(NAME).cpp
 	xres -o $(NAME) icon.rsrc  
 	mimeset -f $(NAME)
 

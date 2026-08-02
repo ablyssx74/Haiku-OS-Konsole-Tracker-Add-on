@@ -24,8 +24,13 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 
 	// 2. Get a reference to the Konsole binary
 	entry_ref konsoleRef;
-	if (get_ref_for_path("/bin/konsole", &konsoleRef) != B_OK) {
-		BAlert *alert = new BAlert("Error", "Could not find /bin/konsole", "OK");
+		#ifndef IS_HAIKU_32BIT
+			if (get_ref_for_path("/bin/konsole", &konsoleRef) != B_OK) {		
+			BAlert *alert = new BAlert("Error", "Could not find /bin/konsole", "OK");
+		#else
+			if (get_ref_for_path("/bin/konsole-x86", &konsoleRef) != B_OK) {	
+			BAlert *alert = new BAlert("Error", "Could not find /bin/konsole-x86", "OK");
+		#endif
 		alert->Go();
 		return;
 	}
@@ -34,8 +39,11 @@ process_refs(entry_ref dir_ref, BMessage *msg, void *reserved)
 	// argv[0] = program name
 	// argv[1] = the flag
 	// argv[2] = the path to open in
-	const char* args[] = { "/bin/konsole", "--workdir", path.Path(), NULL };
-
+	#ifndef IS_HAIKU_32BIT
+		const char* args[] = { "/bin/konsole", "--workdir", path.Path(), NULL };
+	#else
+		const char* args[] = { "/bin/konsole-x86", "--workdir", path.Path(), NULL };
+	#endif
 	// 4. Launch with argc set to 3
 	status_t status = be_roster->Launch(&konsoleRef, 3, args);
 
