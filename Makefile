@@ -7,7 +7,7 @@ PACKAGE_DIR := build/package
 
 
 UNAME_M := $(shell uname -p)
-ifeq ($(UNAME_M), x86)
+ifeq ($(UNAME_M), BePC)
 	CXX = g++
 	CC = gcc
 	CXXFLAGS = -Wall -O3
@@ -17,7 +17,7 @@ ifeq ($(UNAME_M), x86)
 	LD_OPTIMIZE = -Wl,--gc-sections
 	is32bit = _x86
 	DEFINES += -DIS_HAIKU_32BIT
-else ifeq ($(UNAME_M), x86_64)
+else
 	CXX = g++ 
 	CC = gcc
 	CXXFLAGS = -Wall -O3
