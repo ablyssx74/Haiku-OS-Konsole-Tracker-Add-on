@@ -6,7 +6,7 @@ PACKAGE_DIR := build/package
 
 
 
-UNAME_M := $(shell uname -p)
+UNAME_M := $(shell uname -m)
 ifeq ($(UNAME_M), BePC)
 	CXX = g++
 	CC = gcc
